@@ -11,6 +11,7 @@ type Patient = {
 };
 const blank = () => ({study_id:'',age:'',nickname:'',dentition:'Mixed',visit_date:new Date().toISOString().slice(0,10),dmft:'',DMFT:'',plaque:'Not recorded',risk:'Not assessed',findings:'',explanation:'',frankl_behavior:'Not assessed',pain_score:0,pain_scale:'Wong-Baker FACES',pain_face:0,treatment_plan:[],iopa_photo:'',opg_photo:'',radiographic_findings:'',radiographic_interpretation:'',explanation_tamil:'',brushing:'Not recorded',fluoride:'Not recorded',sugar:'Not recorded',supervision:'Not recorded',action1:'',action2:'',action3:'',recall:'',department:'Paedodontics'});
 const photoSlots = [{key:'front',label:'Front view'},{key:'upper',label:'Upper teeth'},{key:'lower',label:'Lower teeth'},{key:'closeup',label:'Finding close-up'}];
+const radiographSlots = [{key:'iopa_photo',label:'IOPA radiograph'},{key:'opg_photo',label:'OPG radiograph'}];
 
 export default function Home() {
  const [session,setSession]=useState<any>(null),[email,setEmail]=useState(''),[password,setPassword]=useState('');
@@ -81,6 +82,7 @@ export default function Home() {
   {field('Priority action 1','action1','text','e.g. Complete advised treatment')}{field('Priority action 2','action2','text','e.g. Brush twice daily with parent help')}{field('Priority action 3','action3','text','e.g. Reduce frequent sugary snacks')}{field('Recall','recall','text','e.g. 3 months')}{field('Department','department','text','Paedodontics')}
   </div>
   <h3 className="subhead">📷 Intraoral photographs</h3><div className="uploadgrid">{photoSlots.map(s=><label className="upload" key={s.key}>{s.label}<input type="file" accept="image/*" onChange={e=>{const f=e.target.files?.[0]||null;if(f&&f.size>5*1024*1024){setMessage('Choose images under 5 MB.');return}setUploads(u=>({...u,[s.key]:f}))}}/><small>{uploads[s.key]?.name|| (selected?.photos?.[s.key]?'Photo already saved':'Choose photo')}</small></label>)}</div>
+  <h3 className="subhead">🩻 Radiographs</h3><div className="uploadgrid">{radiographSlots.map(s=><label className="upload" key={s.key}>{s.label}<input type="file" accept="image/*" onChange={e=>{const f=e.target.files?.[0]||null;if(f&&f.size>5*1024*1024){setMessage('Choose images under 5 MB.');return}setUploads(u=>({...u,[s.key]:f}))}}/><small>{uploads[s.key]?.name|| (selected?.photos?.[s.key]?'Radiograph already saved':'Choose radiograph')}</small></label>)}</div>
   <button className="save" disabled={busy} onClick={save}>{busy?'Saving…':'Save patient to cloud'}</button>{message&&<p className="message">{message}</p>}
  </section>
  <section className="poster" id="poster">
