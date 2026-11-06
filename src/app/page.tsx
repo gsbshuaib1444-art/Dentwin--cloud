@@ -5,11 +5,11 @@ import { supabase } from '../lib/supabase';
 type Patient = {
   id: string; study_id: string; age: string|null; nickname: string|null; dentition: string|null;
   visit_date: string|null;medical_history?:string|null;dmft: number|null; DMFT: number|null; plaque: string|null; risk: string|null;
-  findings: string|null; explanation: string|null; brushing: string|null; fluoride: string|null; frankl_behavior?:string|null; pain_score?:number|null; pain_scale?:string|null; pain_face?:number|null; treatment_plan?:string[]|null; iopa_photo?:string|null; opg_photo?:string|null; radiographic_findings?:string|null; radiographic_interpretation?:string|null; explanation_tamil?:string|null;
+  findings: string|null; explanation: string|null; brushing: string|null; fluoride: string|null; frankl_behavior?:string|null; pain_score?:number|null; pain_scale?:string|null; pain_face?:number|null; treatment_plan?:string[]|null; treatment_items?:{treatment:string;tooth:string}[]|null; iopa_photo?:string|null; opg_photo?:string|null; radiographic_findings?:string|null; radiographic_interpretation?:string|null; explanation_tamil?:string|null;
   sugar: string|null; supervision: string|null; action1: string|null; action2: string|null;
   action3: string|null; recall: string|null; department: string|null; photos: Record<string,string>;
 };
-const blank = () => ({study_id:'',age:'',nickname:'',dentition:'Mixed',visit_date:new Date().toISOString().slice(0,10),medical_history:'',dmft:'',DMFT:'',plaque:'Not recorded',risk:'Not assessed',findings:'',explanation:'',frankl_behavior:'Not assessed',pain_score:0,pain_scale:'Wong-Baker FACES',pain_face:0,treatment_plan:[],iopa_photo:'',opg_photo:'',radiographic_findings:'',radiographic_interpretation:'',explanation_tamil:'',brushing:'Not recorded',fluoride:'Not recorded',sugar:'Not recorded',supervision:'Not recorded',action1:'',action2:'',action3:'',recall:'',department:'Paedodontics'});
+const blank = () => ({study_id:'',age:'',nickname:'',dentition:'Mixed',visit_date:new Date().toISOString().slice(0,10),medical_history:'',dmft:'',DMFT:'',plaque:'Not recorded',risk:'Not assessed',findings:'',explanation:'',frankl_behavior:'Not assessed',pain_score:0,pain_scale:'Wong-Baker FACES',pain_face:0,treatment_plan:[],treatment_items:[],iopa_photo:'',opg_photo:'',radiographic_findings:'',radiographic_interpretation:'',explanation_tamil:'',brushing:'Not recorded',fluoride:'Not recorded',sugar:'Not recorded',supervision:'Not recorded',action1:'',action2:'',action3:'',recall:'',department:'Paedodontics'});
 const photoSlots = [{key:'front',label:'Front view'},{key:'upper',label:'Upper teeth'},{key:'lower',label:'Lower teeth'},{key:'closeup',label:'Finding close-up'},{key:'iopa_photo',label:'IOPA'},{key:'opg_photo',label:'OPG'}];
 
 export default function Home() {
@@ -33,7 +33,8 @@ export default function Home() {
     dmft:p.dmft??'',
     DMFT:p.DMFT??'',
     medical_history:p.medical_history??'',
-    treatment_plan:p.treatment_plan??[]
+    treatment_plan:p.treatment_plan??[],
+    treatment_items:p.treatment_items??[]
   });
   setUploads({});
   setPreviews({});
@@ -50,7 +51,7 @@ export default function Home() {
     if(upErr){setBusy(false);return setMessage('Photo upload failed: '+upErr.message)}
     photos[slot]=path; if(slot==='iopa_photo')form.iopa_photo=path; if(slot==='opg_photo')form.opg_photo=path;
   }
-  const payload={study_id:form.study_id.trim(),medical_history:form.medical_history||null,frankl_behavior:form.frankl_behavior||null,pain_score:Number(form.pain_score||0),pain_scale:form.pain_scale||'Wong-Baker FACES',pain_face:Number(form.pain_face||0),treatment_plan:form.treatment_plan||[],iopa_photo:form.iopa_photo||null,opg_photo:form.opg_photo||null,radiographic_findings:form.radiographic_findings||null,radiographic_interpretation:form.radiographic_interpretation||null,explanation_tamil:form.explanation_tamil||null,age:form.age||null,nickname:form.nickname||null,dentition:form.dentition||null,visit_date:form.visit_date||null,dmft:form.dmft===''?null:Number(form.dmft),DMFT:form.DMFT===''?null:Number(form.DMFT),plaque:form.plaque,risk:form.risk,findings:form.findings,explanation:form.explanation,brushing:form.brushing,fluoride:form.fluoride,sugar:form.sugar,supervision:form.supervision,action1:form.action1,action2:form.action2,action3:form.action3,recall:form.recall,department:form.department,photos};
+  const payload={study_id:form.study_id.trim(),medical_history:form.medical_history||null,frankl_behavior:form.frankl_behavior||null,pain_score:Number(form.pain_score||0),pain_scale:form.pain_scale||'Wong-Baker FACES',pain_face:Number(form.pain_face||0),treatment_plan:form.treatment_plan||[],treatment_items:form.treatment_items||[],iopa_photo:form.iopa_photo||null,opg_photo:form.opg_photo||null,radiographic_findings:form.radiographic_findings||null,radiographic_interpretation:form.radiographic_interpretation||null,explanation_tamil:form.explanation_tamil||null,age:form.age||null,nickname:form.nickname||null,dentition:form.dentition||null,visit_date:form.visit_date||null,dmft:form.dmft===''?null:Number(form.dmft),DMFT:form.DMFT===''?null:Number(form.DMFT),plaque:form.plaque,risk:form.risk,findings:form.findings,explanation:form.explanation,brushing:form.brushing,fluoride:form.fluoride,sugar:form.sugar,supervision:form.supervision,action1:form.action1,action2:form.action2,action3:form.action3,recall:form.recall,department:form.department,photos};
   const result=selected?await supabase.from('patients').update(payload).eq('id',selected.id).select().single():await supabase.from('patients').insert(payload).select().single();
   setBusy(false);if(result.error){setMessage(result.error.message.includes('DENTWIN_LIMIT_30')?'The shared workspace already has 30 patient records.':result.error.message);return}
   setMessage('Patient profile saved to the cloud.');await loadPatients();setSelected(result.data as Patient);
@@ -96,23 +97,16 @@ export default function Home() {
  function field(label:string,key:string,type='text',placeholder=''){return <label>{label}<input type={type} value={form[key]??''} placeholder={placeholder} onChange={e=>set(key,e.target.value)}/></label>}
  function selectField(label:string,key:string,opts:string[]){return <label>{label}<select value={form[key]??opts[0]} onChange={e=>set(key,e.target.value)}>{opts.map(o=><option key={o}>{o}</option>)}</select></label>}
 function multiSelectField(label:string,key:string,opts:string[]){
-  return <div className="full" style={{margin:'8px 0'}}>
+  const items:( {treatment:string;tooth:string} )[] = form.treatment_items||[];
+  const fdi=['11','12','13','14','15','16','17','18','21','22','23','24','25','26','27','28','31','32','33','34','35','36','37','38','41','42','43','44','45','46','47','48','51','52','53','54','55','61','62','63','64','65','71','72','73','74','75','81','82','83','84','85'];
+  const add=(treatment:string)=>{if(!items.some(x=>x.treatment===treatment))set('treatment_items',[...items,{treatment,tooth:''}]);};
+  const update=(i:number,tooth:string)=>set('treatment_items',items.map((x,n)=>n===i?{...x,tooth}:x));
+  const remove=(i:number)=>set('treatment_items',items.filter((_,n)=>n!==i));
+  return <div className="full treatment-picker">
     <label>{label}</label>
-    <div style={{border:'1px solid #cbd6e3',borderRadius:8,padding:10,background:'#fff'}}>
-      {opts.map(o=><label key={o} style={{display:'flex',alignItems:'center',gap:9,margin:'8px 0',fontSize:13}}>
-        <input
-          type="checkbox"
-          checked={(form[key]||[]).includes(o)}
-          onChange={e=>{
-            const current:string[]=form[key]||[];
-            set(key,e.target.checked?[...current,o]:current.filter((x:string)=>x!==o));
-          }}
-          style={{width:18,height:18,margin:0}}
-        />
-        <span>{o}</span>
-      </label>)}
-    </div>
-    <small>Tap to select or deselect multiple treatments.</small>
+    <details><summary>＋ Add a treatment</summary><div className="treatment-options">{opts.map(o=><button type="button" key={o} className="treatment-option" onClick={()=>add(o)}>{items.some(x=>x.treatment===o)?'✓ ': '+ '}{o}</button>)}</div></details>
+    {items.length===0?<small>Select each planned treatment, then assign its FDI tooth number.</small>:<div className="treatment-rows">{items.map((item,i)=><div className="treatment-row" key={item.treatment}><b>{item.treatment}</b><label>FDI tooth number<select value={item.tooth} onChange={e=>update(i,e.target.value)}><option value="">Select tooth</option>{fdi.map(n=><option key={n} value={n}>{n}</option>)}</select></label><button type="button" className="remove-treatment" onClick={()=>remove(i)} aria-label="Remove treatment">×</button></div>)}</div>}
+    <small>FDI notation: permanent teeth 11–48; primary teeth 51–85.</small>
   </div>;
 }
  
@@ -120,11 +114,20 @@ function multiSelectField(label:string,key:string,opts:string[]){
 }
 function Poster({patient:p,previews,onPrint}:{patient:Patient,previews:Record<string,string>,onPrint:()=>void}){
  const photos=photoSlots.filter(s=>p.photos?.[s.key]);
- return <><div className="posterhead"><div><h2>My Bright Smile{p.nickname?' · '+p.nickname:''}!</h2><p>A special smile report just for you</p></div><span className="cartoon">🦷🐻</span></div><div className="posterbody">
- <div className="stats"><div><small>MY AGE</small><b>{p.age||'—'}</b></div><div><small>MY TEETH</small><b>{p.dentition||'—'}</b></div><div><small>MY DENTAL CHECK</small><b>d {p.dmft??'—'} / D {p.DMFT??'—'}</b></div><div><small>MY SMILE RISK</small><b>{p.risk||'—'}</b></div></div>
- <div className="postergrid"><article><h3> What did we find?</h3><p>{p.findings||'No findings entered.'}</p><p>{p.explanation||'Your dentist will explain what was found and what it means for your teeth.'}</p></article><article><h3> My smile habits</h3><ul><li> Brushing: {p.brushing||'Not recorded'}</li><li>  Fluoride toothpaste: {p.fluoride||'Not recorded'}</li><li> Sugary snacks: {p.sugar||'Not recorded'}</li><li> Parent help: {p.supervision||'Not recorded'}</li></ul></article></div>
- <article className="photoarticle"><h3>  Let's look at my teeth photo!</h3><div className="photogrid">{photos.length?photos.map(s=><figure key={s.key}>{previews[s.key]?<img src={previews[s.key]} alt={s.label}/>:<div className="photoplace">Photo saved in cloud<br/>Print dashboard to load it</div>}<figcaption>{s.label}</figcaption></figure>):<p>No photographs uploaded.</p>}</div></article>
- <article className="actionarticle"><h3>  My super smile action plan</h3><div className="actiongrid">{[p.action1,p.action2,p.action3].filter(Boolean).map((a,i)=><div key={i}><b>{['1️⃣ First step','2️⃣ Next step','3️⃣ Super step'][i]}</b>{a}</div>)}</div><p className="remember">  Remember: Brush in the morning and before bed, choose water often, and visit your dentist as advised!</p></article>
- <footer>Study ID: {p.study_id} · Department: {p.department||'Paedodontics'} · Visit: {p.visit_date||'—'} · Recall: {p.recall||'As advised'}</footer>
- <button className="no-print printbtn" onClick={onPrint}>Print / Save this child's poster as PDF</button></div></>;
+ const treatments=p.treatment_items||[];
+ return <div className="smile-poster">
+  <div className="posterhead"><div><span className="poster-kicker">MY DENTWIN SMILE REPORT</span><h2>Look at my <em>super smile{p.nickname?' · '+p.nickname:''}!</em></h2><p>A little report about my healthy teeth 🌈</p></div><span className="poster-mascots">🦷 🐻 ⭐ 🐰</span></div>
+  <div className="star-banner">🌟 YOU ARE A SMILE STAR! 🌟</div>
+  <div className="posterbody">
+   <div className="stats"><div><small>🎂 MY AGE</small><b>{p.age||'—'}</b></div><div><small>🦷 MY TEETH</small><b>{p.dentition||'—'}</b></div><div><small>🔎 DENTAL CHECK</small><b>d {p.dmft??'—'} / D {p.DMFT??'—'}</b></div><div><small>🌈 SMILE RISK</small><b>{p.risk||'—'}</b></div></div>
+   <article className="finding-panel"><h3>🔎 What did the dentist find?</h3><h4>My dental findings</h4><p>{p.findings||'No findings entered yet.'}</p><h4>What it means</h4><p>{p.explanation||'Your dentist will explain what was found and how to keep your teeth healthy.'}</p></article>
+   <article className="habits-panel"><h3>🌱 My healthy smile habits</h3><ul><li><b>Brushing:</b> {p.brushing||'Not recorded'}</li><li><b>Fluoride toothpaste:</b> {p.fluoride||'Not recorded'}</li><li><b>Sugary snacks:</b> {p.sugar||'Not recorded'}</li><li><b>Grown-up help:</b> {p.supervision||'Not recorded'}</li></ul></article>
+   {treatments.length>0&&<article className="treatment-panel"><h3>🦷 My dental treatment plan</h3>{treatments.map((t,i)=><p key={i}>• {t.treatment} — Tooth {t.tooth||'to be confirmed'}</p>)}</article>}
+   <article className="photoarticle"><h3>📸 My teeth in pictures</h3><div className="photogrid">{photos.length?photos.map(s=><figure key={s.key}>{previews[s.key]?<img src={previews[s.key]} alt={s.label}/>:<div className="photoplace">Photo saved in cloud</div>}<figcaption>{s.label}</figcaption></figure>):<p>No photographs uploaded yet.</p>}</div></article>
+   <article className="actionarticle"><h3>🦸 My super-smile mission!</h3><div className="actiongrid">{[p.action1,p.action2,p.action3].filter(Boolean).map((a,i)=><div key={i}><b>{['⭐ Mission 1','⭐ Mission 2','⭐ Mission 3'][i]}</b>{a}</div>)}</div><p className="remember">💧 Drink water, enjoy tooth-friendly snacks and brush every day. You can do it, Smile Star!</p></article>
+   <div className="congrats-banner">🎉 Keep smiling — your smile is special! 💚</div>
+   <footer>Study ID: {p.study_id} · Department: {p.department||'Paedodontics'} · Visit: {p.visit_date||'—'} · Next visit: {p.recall||'As advised'}</footer>
+   <button className="no-print printbtn" onClick={onPrint}>Print / Save this child's poster as PDF</button>
+  </div>
+ </div>;
 }
