@@ -90,7 +90,8 @@ export default function Home() {
       {opts.map(o=><option key={o} value={o}>{o}</option>)}
     </select>
     <small>Hold Ctrl (Windows) or Command (Mac) to select multiple treatments.</small>
-  </label>
+  </label>;
+ }
   function textArea(label:string,key:string,placeholder:string){return <label className="full">{label}<textarea value={form[key]??''} placeholder={placeholder} onChange={e=>set(key,e.target.value)}/></label>}
 }
 function Poster({patient:p,previews,onPrint}:{patient:Patient,previews:Record<string,string>,onPrint:()=>void}){
