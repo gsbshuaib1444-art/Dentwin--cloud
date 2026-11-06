@@ -29,3 +29,36 @@
 .remove-treatment{background:#d8eee8;color:#286c63;padding:4px;font-size:20px;line-height:1}
 .treatment-picker>small{display:block;color:#71819a;font-size:11px;line-height:1.45;margin-top:9px}
 @media(max-width:560px){.treatment-controls{grid-template-columns:1fr}.treatment-controls button{width:fit-content}.treatment-row{grid-template-columns:minmax(0,1fr) 112px 30px}}
+
+/* Colourful child-friendly smile poster reference styling */
+.poster{background:#fffafc;border:2px solid #f4dbe8;box-shadow:0 12px 32px #5b3c5914}
+.posterhead{background:linear-gradient(115deg,#ffdce9 0%,#fff0c7 48%,#d9f5e8 100%);padding:22px 20px;min-height:130px}
+.posterhead h2{font-size:clamp(22px,2.1vw,30px);color:#6d426d;font-weight:900}
+.posterhead p{font-size:13px;color:#765b73}
+.cartoon{font-size:42px;letter-spacing:3px}
+.posterbody{padding:16px;background:linear-gradient(180deg,#fffdfd,#fff)}
+.stats{gap:9px}
+.stats div{min-height:82px;display:flex;flex-direction:column;justify-content:center;border-radius:15px;padding:12px}
+.stats div:nth-child(1){background:#ffe4ef}
+.stats div:nth-child(2){background:#fff1c9}
+.stats div:nth-child(3){background:#dcf5e7}
+.stats div:nth-child(4){background:#e9e2ff}
+.stats small{font-size:9px;letter-spacing:.6px;color:#735d78}
+.stats b{font-size:17px;color:#59436b;margin-top:4px}
+.postergrid{gap:10px;margin-top:12px}
+.poster article{border:0;border-radius:15px;padding:14px;margin-top:10px}
+.postergrid article:first-child{background:#ffeaf1}
+.postergrid article:last-child{background:#e2f6e9}
+.poster h3{font-size:14px;color:#614b72;font-weight:850}
+.poster p,.poster li{font-size:12px;line-height:1.55;color:#51485b}
+.photoarticle{background:#e8f2ff!important}
+.photogrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.photogrid img,.photoplace{height:150px;border-radius:12px}
+.photogrid figure{background:#fff;border-radius:12px;padding:7px}
+.photogrid figcaption{text-align:center;padding:5px}
+.actionarticle{background:#fff3cc!important}
+.actiongrid div{background:#fff;border:1px solid #f5e4a6;border-radius:12px}
+.remember{background:#fff;border-radius:12px}
+.posterbody>footer{margin-top:12px;padding:10px;border-radius:12px;background:linear-gradient(90deg,#ffe3ee,#fff0ca,#dcf5e7);color:#67516c;text-align:center;font-size:10px}
+@media(max-width:900px){.postergrid{grid-template-columns:1fr}.photogrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media print{.poster{border:0;box-shadow:none}.posterhead{background:linear-gradient(115deg,#ffdce9,#fff0c7,#d9f5e8)!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}}
