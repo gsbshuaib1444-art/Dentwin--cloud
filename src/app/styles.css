@@ -14,3 +14,18 @@
 .treatment-chip .remove-treatment{background:#cce9df;color:#326d65;border-radius:50%;width:25px;height:25px;padding:0;font-size:17px;line-height:1}
 .treatment-picker>small{display:block;margin-top:10px;color:#71819a;font-size:11px;font-weight:400;line-height:1.45}
 @media(max-width:560px){.treatment-picker{padding:12px}.treatment-select{font-size:14px}.treatment-chip{max-width:100%}}
+
+/* Treatment selector – scoped so the existing colourful poster remains unchanged */
+.treatment-picker{grid-column:1/-1;background:#f4f8ff;border:1px solid #d7e5f6;border-radius:13px;padding:12px;margin:8px 0 12px}
+.treatment-picker>label{font-size:13px;font-weight:800;color:#53647b;margin:0 0 8px}
+.treatment-controls{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center}
+.treatment-controls select{font-size:14px;min-height:44px}
+.treatment-controls button{white-space:nowrap;min-height:44px}
+.treatment-rows{display:grid;gap:7px;margin-top:10px}
+.treatment-row{display:grid;grid-template-columns:minmax(0,1fr) 135px 34px;gap:8px;align-items:center;background:#eaf8f3;border-radius:10px;padding:8px 10px}
+.treatment-row>b{font-size:12px;color:#286c63}
+.treatment-row label{margin:0;font-size:10px;color:#53647b}
+.treatment-row select{font-size:12px;padding:6px;margin-top:3px}
+.remove-treatment{background:#d8eee8;color:#286c63;padding:4px;font-size:20px;line-height:1}
+.treatment-picker>small{display:block;color:#71819a;font-size:11px;line-height:1.45;margin-top:9px}
+@media(max-width:560px){.treatment-controls{grid-template-columns:1fr}.treatment-controls button{width:fit-content}.treatment-row{grid-template-columns:minmax(0,1fr) 112px 30px}}
