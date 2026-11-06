@@ -26,7 +26,19 @@ export default function Home() {
  async function auth(){if(!supabase)return;setBusy(true);setMessage('');const result=mode==='signup'?await supabase.auth.signUp({email,password}):await supabase.auth.signInWithPassword({email,password});setBusy(false);if(result.error)setMessage(result.error.message);else if(mode==='signup'&&!result.data.session)setMessage('Check your email to confirm your account, then sign in.')}
  async function logout(){await supabase?.auth.signOut();setSession(null);setPatients([]);setSelected(null)}
  function startNew(){setSelected(null);setForm(blank());setUploads({});setPreviews({});setMessage('New patient record. Use a coded study ID, not a name.')}
- function edit(p:Patient){setSelected(p);setForm({...p,dmft:p.dmft??'',DMFT:p.DMFT??''});setUploads({});setPreviews({});setMessage('Editing '+p.study_id)}
+ function edit(p:Patient){
+  setSelected(p);
+  setForm({
+    ...p,
+    dmft:p.dmft??'',
+    DMFT:p.DMFT??'',
+    medical_history:p.medical_history??'',
+    treatment_plan:p.treatment_plan??[]
+  });
+  setUploads({});
+  setPreviews({});
+  setMessage('Editing '+p.study_id);
+}
  async function save(){
   if(!supabase||!form.study_id?.trim())return setMessage('Study ID is required.');
   setBusy(true);setMessage('');
