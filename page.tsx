@@ -4,7 +4,7 @@ import { supabase } from '../lib/supabase';
 
 type Patient = {
   id: string; study_id: string; age: string|null; nickname: string|null; dentition: string|null;
-  visit_date: string|null; dmft: number|null; DMFT: number|null; plaque: string|null; risk: string|null;
+  visit_date: string|null;medical_history?:string|null;dmft: number|null; DMFT: number|null; plaque: string|null; risk: string|null;
   findings: string|null; explanation: string|null; brushing: string|null; fluoride: string|null; frankl_behavior?:string|null; pain_score?:number|null; pain_scale?:string|null; pain_face?:number|null; treatment_plan?:string[]|null; iopa_photo?:string|null; opg_photo?:string|null; radiographic_findings?:string|null; radiographic_interpretation?:string|null; explanation_tamil?:string|null;
   sugar: string|null; supervision: string|null; action1: string|null; action2: string|null;
   action3: string|null; recall: string|null; department: string|null; photos: Record<string,string>;
