@@ -84,7 +84,14 @@ export default function Home() {
  </main>;
  function field(label:string,key:string,type='text',placeholder=''){return <label>{label}<input type={type} value={form[key]??''} placeholder={placeholder} onChange={e=>set(key,e.target.value)}/></label>}
  function selectField(label:string,key:string,opts:string[]){return <label>{label}<select value={form[key]??opts[0]} onChange={e=>set(key,e.target.value)}>{opts.map(o=><option key={o}>{o}</option>)}</select></label>}
- function textArea(label:string,key:string,placeholder:string){return <label className="full">{label}<textarea value={form[key]??''} placeholder={placeholder} onChange={e=>set(key,e.target.value)}/></label>}
+ function multiSelectField(label:string,key:string,opts:string[]){
+  return <label className="full">{label}
+    <select multiple value={form[key]||[]} onChange={e=>set(key,Array.from(e.target.selectedOptions).map(o=>o.value))}>
+      {opts.map(o=><option key={o} value={o}>{o}</option>)}
+    </select>
+    <small>Hold Ctrl (Windows) or Command (Mac) to select multiple treatments.</small>
+  </label>
+  function textArea(label:string,key:string,placeholder:string){return <label className="full">{label}<textarea value={form[key]??''} placeholder={placeholder} onChange={e=>set(key,e.target.value)}/></label>}
 }
 function Poster({patient:p,previews,onPrint}:{patient:Patient,previews:Record<string,string>,onPrint:()=>void}){
  const photos=photoSlots.filter(s=>p.photos?.[s.key]);
