@@ -18,6 +18,7 @@ export default function Home() {
  const [selected,setSelected]=useState<Patient|null>(null),[form,setForm]=useState<any>(blank()),[search,setSearch]=useState('');
  const [uploads,setUploads]=useState<Record<string,File|null>>({}),[previews,setPreviews]=useState<Record<string,string>>({});
  const [busy,setBusy]=useState(false),[message,setMessage]=useState('');
+ const [selectedTreatment,setSelectedTreatment]=useState('');
  const configured=!!supabase;
  useEffect(()=>{if(!supabase)return;supabase.auth.getSession().then(({data})=>setSession(data.session));const {data:{subscription}}=supabase.auth.onAuthStateChange((_e,s)=>setSession(s));return()=>subscription.unsubscribe()},[]);
  useEffect(()=>{if(session)loadPatients()},[session]);
@@ -99,14 +100,21 @@ export default function Home() {
 function multiSelectField(label:string,key:string,opts:string[]){
   const items:( {treatment:string;tooth:string} )[] = form.treatment_items||[];
   const fdi=['11','12','13','14','15','16','17','18','21','22','23','24','25','26','27','28','31','32','33','34','35','36','37','38','41','42','43','44','45','46','47','48','51','52','53','54','55','61','62','63','64','65','71','72','73','74','75','81','82','83','84','85'];
-  const add=(treatment:string)=>{if(!items.some(x=>x.treatment===treatment))set('treatment_items',[...items,{treatment,tooth:''}]);};
+  const add=()=>{if(!selectedTreatment)return;if(!items.some(x=>x.treatment===selectedTreatment))set('treatment_items',[...items,{treatment:selectedTreatment,tooth:''}]);setSelectedTreatment('');};
   const update=(i:number,tooth:string)=>set('treatment_items',items.map((x,n)=>n===i?{...x,tooth}:x));
   const remove=(i:number)=>set('treatment_items',items.filter((_,n)=>n!==i));
   return <div className="full treatment-picker">
-    <label>{label}</label>
-    <details><summary>＋ Add a treatment</summary><div className="treatment-options">{opts.map(o=><button type="button" key={o} className="treatment-option" onClick={()=>add(o)}>{items.some(x=>x.treatment===o)?'✓ ': '+ '}{o}</button>)}</div></details>
-    {items.length===0?<small>Select each planned treatment, then assign its FDI tooth number.</small>:<div className="treatment-rows">{items.map((item,i)=><div className="treatment-row" key={item.treatment}><b>{item.treatment}</b><label>FDI tooth number<select value={item.tooth} onChange={e=>update(i,e.target.value)}><option value="">Select tooth</option>{fdi.map(n=><option key={n} value={n}>{n}</option>)}</select></label><button type="button" className="remove-treatment" onClick={()=>remove(i)} aria-label="Remove treatment">×</button></div>)}</div>}
-    <small>FDI notation: permanent teeth 11–48; primary teeth 51–85.</small>
+    <label>{label} – select all applicable options</label>
+    <select className="treatment-select" value={selectedTreatment} onChange={e=>setSelectedTreatment(e.target.value)}>
+      <option value="">Choose a paediatric dental treatment...</option>{opts.map(o=><option key={o} value={o}>{o}</option>)}
+    </select>
+    <button type="button" className="add-treatment" onClick={add} disabled={!selectedTreatment}>＋ Add treatment</button>
+    {items.length>0&&<div className="treatment-chips">{items.map((item,i)=><div className="treatment-chip" key={item.treatment}>
+      <span>{item.treatment}</span>
+      <select aria-label={`FDI tooth number for ${item.treatment}`} value={item.tooth} onChange={e=>update(i,e.target.value)}><option value="">Tooth no.</option>{fdi.map(n=><option key={n} value={n}>{n}</option>)}</select>
+      <button type="button" className="remove-treatment" onClick={()=>remove(i)} aria-label={`Remove ${item.treatment}`}>×</button>
+    </div>)}</div>}
+    <small>Choose only clinically indicated options after examination. This is a planning list, not an automatic treatment recommendation.</small>
   </div>;
 }
  
@@ -114,20 +122,11 @@ function multiSelectField(label:string,key:string,opts:string[]){
 }
 function Poster({patient:p,previews,onPrint}:{patient:Patient,previews:Record<string,string>,onPrint:()=>void}){
  const photos=photoSlots.filter(s=>p.photos?.[s.key]);
- const treatments=p.treatment_items||[];
- return <div className="smile-poster">
-  <div className="posterhead"><div><span className="poster-kicker">MY DENTWIN SMILE REPORT</span><h2>Look at my <em>super smile{p.nickname?' · '+p.nickname:''}!</em></h2><p>A little report about my healthy teeth 🌈</p></div><span className="poster-mascots">🦷 🐻 ⭐ 🐰</span></div>
-  <div className="star-banner">🌟 YOU ARE A SMILE STAR! 🌟</div>
-  <div className="posterbody">
-   <div className="stats"><div><small>🎂 MY AGE</small><b>{p.age||'—'}</b></div><div><small>🦷 MY TEETH</small><b>{p.dentition||'—'}</b></div><div><small>🔎 DENTAL CHECK</small><b>d {p.dmft??'—'} / D {p.DMFT??'—'}</b></div><div><small>🌈 SMILE RISK</small><b>{p.risk||'—'}</b></div></div>
-   <article className="finding-panel"><h3>🔎 What did the dentist find?</h3><h4>My dental findings</h4><p>{p.findings||'No findings entered yet.'}</p><h4>What it means</h4><p>{p.explanation||'Your dentist will explain what was found and how to keep your teeth healthy.'}</p></article>
-   <article className="habits-panel"><h3>🌱 My healthy smile habits</h3><ul><li><b>Brushing:</b> {p.brushing||'Not recorded'}</li><li><b>Fluoride toothpaste:</b> {p.fluoride||'Not recorded'}</li><li><b>Sugary snacks:</b> {p.sugar||'Not recorded'}</li><li><b>Grown-up help:</b> {p.supervision||'Not recorded'}</li></ul></article>
-   {treatments.length>0&&<article className="treatment-panel"><h3>🦷 My dental treatment plan</h3>{treatments.map((t,i)=><p key={i}>• {t.treatment} — Tooth {t.tooth||'to be confirmed'}</p>)}</article>}
-   <article className="photoarticle"><h3>📸 My teeth in pictures</h3><div className="photogrid">{photos.length?photos.map(s=><figure key={s.key}>{previews[s.key]?<img src={previews[s.key]} alt={s.label}/>:<div className="photoplace">Photo saved in cloud</div>}<figcaption>{s.label}</figcaption></figure>):<p>No photographs uploaded yet.</p>}</div></article>
-   <article className="actionarticle"><h3>🦸 My super-smile mission!</h3><div className="actiongrid">{[p.action1,p.action2,p.action3].filter(Boolean).map((a,i)=><div key={i}><b>{['⭐ Mission 1','⭐ Mission 2','⭐ Mission 3'][i]}</b>{a}</div>)}</div><p className="remember">💧 Drink water, enjoy tooth-friendly snacks and brush every day. You can do it, Smile Star!</p></article>
-   <div className="congrats-banner">🎉 Keep smiling — your smile is special! 💚</div>
-   <footer>Study ID: {p.study_id} · Department: {p.department||'Paedodontics'} · Visit: {p.visit_date||'—'} · Next visit: {p.recall||'As advised'}</footer>
-   <button className="no-print printbtn" onClick={onPrint}>Print / Save this child's poster as PDF</button>
-  </div>
- </div>;
+ return <><div className="posterhead"><div><h2>My Bright Smile{p.nickname?' · '+p.nickname:''}!</h2><p>A special smile report just for you</p></div><span className="cartoon">🦷🐻</span></div><div className="posterbody">
+ <div className="stats"><div><small>MY AGE</small><b>{p.age||'—'}</b></div><div><small>MY TEETH</small><b>{p.dentition||'—'}</b></div><div><small>MY DENTAL CHECK</small><b>d {p.dmft??'—'} / D {p.DMFT??'—'}</b></div><div><small>MY SMILE RISK</small><b>{p.risk||'—'}</b></div></div>
+ <div className="postergrid"><article><h3> What did we find?</h3><p>{p.findings||'No findings entered.'}</p><p>{p.explanation||'Your dentist will explain what was found and what it means for your teeth.'}</p></article><article><h3> My smile habits</h3><ul><li> Brushing: {p.brushing||'Not recorded'}</li><li>  Fluoride toothpaste: {p.fluoride||'Not recorded'}</li><li> Sugary snacks: {p.sugar||'Not recorded'}</li><li> Parent help: {p.supervision||'Not recorded'}</li></ul></article></div>
+ <article className="photoarticle"><h3>  Let's look at my teeth photo!</h3><div className="photogrid">{photos.length?photos.map(s=><figure key={s.key}>{previews[s.key]?<img src={previews[s.key]} alt={s.label}/>:<div className="photoplace">Photo saved in cloud<br/>Print dashboard to load it</div>}<figcaption>{s.label}</figcaption></figure>):<p>No photographs uploaded.</p>}</div></article>
+ <article className="actionarticle"><h3>  My super smile action plan</h3><div className="actiongrid">{[p.action1,p.action2,p.action3].filter(Boolean).map((a,i)=><div key={i}><b>{['1️⃣ First step','2️⃣ Next step','3️⃣ Super step'][i]}</b>{a}</div>)}</div><p className="remember">  Remember: Brush in the morning and before bed, choose water often, and visit your dentist as advised!</p></article>
+ <footer>Study ID: {p.study_id} · Department: {p.department||'Paedodontics'} · Visit: {p.visit_date||'—'} · Recall: {p.recall||'As advised'}</footer>
+ <button className="no-print printbtn" onClick={onPrint}>Print / Save this child's poster as PDF</button></div></>;
 }
