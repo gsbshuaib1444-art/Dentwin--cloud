@@ -83,14 +83,27 @@ export default function Home() {
  </main>;
  function field(label:string,key:string,type='text',placeholder=''){return <label>{label}<input type={type} value={form[key]??''} placeholder={placeholder} onChange={e=>set(key,e.target.value)}/></label>}
  function selectField(label:string,key:string,opts:string[]){return <label>{label}<select value={form[key]??opts[0]} onChange={e=>set(key,e.target.value)}>{opts.map(o=><option key={o}>{o}</option>)}</select></label>}
- function multiSelectField(label:string,key:string,opts:string[]){
-  return <label className="full">{label}
-    <select multiple value={form[key]||[]} onChange={e=>set(key,Array.from(e.target.selectedOptions).map(o=>o.value))}>
-      {opts.map(o=><option key={o} value={o}>{o}</option>)}
-    </select>
-    <small>Hold Ctrl (Windows) or Command (Mac) to select multiple treatments.</small>
-  </label>;
- }
+function multiSelectField(label:string,key:string,opts:string[]){
+  return <div className="full" style={{margin:'8px 0'}}>
+    <label>{label}</label>
+    <div style={{border:'1px solid #cbd6e3',borderRadius:8,padding:10,background:'#fff'}}>
+      {opts.map(o=><label key={o} style={{display:'flex',alignItems:'center',gap:9,margin:'8px 0',fontSize:13}}>
+        <input
+          type="checkbox"
+          checked={(form[key]||[]).includes(o)}
+          onChange={e=>{
+            const current:string[]=form[key]||[];
+            set(key,e.target.checked?[...current,o]:current.filter((x:string)=>x!==o));
+          }}
+          style={{width:18,height:18,margin:0}}
+        />
+        <span>{o}</span>
+      </label>)}
+    </div>
+    <small>Tap to select or deselect multiple treatments.</small>
+  </div>;
+}
+ 
   function textArea(label:string,key:string,placeholder:string){return <label className="full">{label}<textarea value={form[key]??''} placeholder={placeholder} onChange={e=>set(key,e.target.value)}/></label>}
 }
 function Poster({patient:p,previews,onPrint}:{patient:Patient,previews:Record<string,string>,onPrint:()=>void}){
