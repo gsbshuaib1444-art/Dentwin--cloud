@@ -93,3 +93,11 @@
 .poster .stats{grid-template-columns:repeat(5,minmax(0,1fr))}
 @media(max-width:560px){.poster .stats{grid-template-columns:repeat(2,minmax(0,1fr))}.pain-cooperation-row{grid-template-columns:1fr 1fr;gap:7px}}
 @media print{.poster .stats{grid-template-columns:repeat(5,minmax(0,1fr))}}
+
+/* Keep the fixed pain scale clear and prevent date/risk controls colliding on narrow screens */
+.fields{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.fields>label,.fields>div{min-width:0}
+.fields input,.fields select,.fields textarea{min-width:0;max-width:100%}
+.date-risk-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px;align-items:end}
+.date-risk-row>label{min-width:0}
+@media(max-width:560px){.date-risk-row{grid-template-columns:minmax(0,1fr)}.date-risk-row input[type=date]{min-width:0;width:100%}}
