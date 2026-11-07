@@ -148,3 +148,56 @@
 @keyframes auth-card-in{from{opacity:0;transform:translateY(16px) scale(.985)}to{opacity:1;transform:translateY(0) scale(1)}}
 @media(max-width:560px){.auth{padding:20px 15px}.authcard{padding:23px 21px 18px;border-radius:25px}.mascot-stage{height:88px}.mascot-tooth{font-size:58px}.mascot-bear{font-size:51px}.mascot-rabbit{font-size:37px}.authcard h1{font-size:32px}.auth-welcome{margin:12px 0!important}.auth-footer{margin-top:16px}.sparkle-one{left:5%;top:10%}.sparkle-two{right:5%;top:20%}.sparkle-three{left:7%;bottom:8%}}
 @media(prefers-reduced-motion:reduce){.authcard,.mascot-stage span,.auth-sparkle{animation:none!important}.auth-submit{transition:none}}
+
+
+/* Brighter login palette and equally sized, animated mascot characters */
+.auth{
+ background:
+  radial-gradient(circle at 8% 16%,#ffc9e2 0 10%,transparent 27%),
+  radial-gradient(circle at 92% 13%,#ffe3a3 0 9%,transparent 26%),
+  radial-gradient(circle at 88% 88%,#aeeedc 0 11%,transparent 29%),
+  radial-gradient(circle at 10% 85%,#c9ddff 0 10%,transparent 27%),
+  linear-gradient(135deg,#fff0f7 0%,#f0eaff 36%,#e8f7ff 68%,#e8fff2 100%);
+}
+.auth:before{background:#ffb8d7;opacity:.58}
+.auth:after{background:#9ee8d3;opacity:.62}
+.authcard{
+ background:linear-gradient(155deg,rgba(255,255,255,.98),rgba(255,250,255,.96));
+ border:2px solid rgba(255,255,255,.95);
+ box-shadow:0 24px 65px rgba(95,89,157,.18),0 0 0 7px rgba(255,255,255,.22);
+}
+.mascot-stage{
+ height:104px;width:min(100%,330px);gap:12px;
+ display:flex;align-items:center;justify-content:center;
+}
+.mascot-stage span{
+ position:static!important;inset:auto!important;
+ width:64px;height:76px;flex:0 0 64px;
+ display:grid!important;place-items:center;
+ font-size:51px!important;line-height:1;
+ border-radius:21px;
+ background:linear-gradient(145deg,#fff8d9,#ffe6f0);
+ box-shadow:0 7px 16px rgba(83,76,126,.11),inset 0 0 0 1px rgba(255,255,255,.9);
+ filter:drop-shadow(0 4px 3px rgba(48,59,80,.12));
+}
+.mascot-tooth{background:linear-gradient(145deg,#fff8dc,#e7f4ff)!important;animation:tooth-float 2.6s ease-in-out infinite!important}
+.mascot-bear{background:linear-gradient(145deg,#ffe8ce,#ffd9c8)!important;animation:bear-bounce 2.8s ease-in-out .2s infinite!important}
+.mascot-rabbit{background:linear-gradient(145deg,#f0e5ff,#ffe5f1)!important;animation:rabbit-hop 2.3s ease-in-out .4s infinite!important}
+.mascot-star{background:linear-gradient(145deg,#fff5b8,#ffe2a4)!important;animation:star-twinkle 2s ease-in-out .1s infinite!important}
+.welcome-chip{background:linear-gradient(90deg,#ffe1ef,#fff0bf,#d8f5e8);color:#70506e}
+.authcard h1{color:#254f83;text-shadow:0 2px 0 #e5f1ff}
+.auth-tagline{color:#3e9c91}
+.auth-submit{background:linear-gradient(100deg,#548fe1 0%,#8b75d5 48%,#45b99f 100%)}
+.auth-footer{border-color:#eadcf7;color:#7185a0}
+.auth-sparkle{color:#f0b93f;text-shadow:0 2px 7px #f5d98a}
+@keyframes tooth-float{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-9px) rotate(3deg)}}
+@keyframes bear-bounce{0%,100%{transform:translateY(0) rotate(2deg)}45%{transform:translateY(-7px) rotate(-3deg)}65%{transform:translateY(0) rotate(1deg)}}
+@keyframes rabbit-hop{0%,72%,100%{transform:translateY(0) rotate(0)}82%{transform:translateY(-12px) rotate(-5deg)}90%{transform:translateY(0) rotate(4deg)}}
+@keyframes star-twinkle{0%,100%{transform:scale(.9) rotate(-8deg)}50%{transform:scale(1.12) rotate(12deg)}}
+@media(max-width:560px){
+ .mascot-stage{height:94px;gap:8px;width:100%}
+ .mascot-stage span{width:59px;height:70px;flex-basis:59px;font-size:47px!important;border-radius:18px}
+}
+@media(prefers-reduced-motion:reduce){
+ .mascot-tooth,.mascot-bear,.mascot-rabbit,.mascot-star{animation:none!important}
+}
