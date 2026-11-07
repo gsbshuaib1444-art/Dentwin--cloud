@@ -66,3 +66,22 @@
 /* Five-point Facial Image Scale for child dental anxiety */
 .anxiety-faces{grid-template-columns:repeat(5,minmax(0,1fr))}.anxietybox{background:#fff8f0;border-color:#f1dfc9}.anxiety-faces .face span{font-size:30px}
 @media(max-width:560px){.anxiety-faces{grid-template-columns:repeat(5,minmax(0,1fr))}.anxiety-faces .face{padding:7px 2px}.anxiety-faces .face span{font-size:25px}.anxiety-faces .face small{font-size:8px}}
+
+
+/* Individual pastel cards for every text section in the printable smile poster */
+.poster .postergrid article:first-child{background:#e2f6e9!important;border:1px solid #c8ead6!important}
+.poster .postergrid article:last-child{background:#ffeaf1!important;border:1px solid #f5d4e1!important}
+.poster .pain-anxiety-report{background:#f0eaff!important;border:1px solid #ded1fa!important;border-radius:15px;padding:14px;margin-top:10px}
+.poster .medical-history-report{background:#fff1cf!important;border:1px solid #f3dfaa!important;border-radius:15px;padding:14px;margin-top:10px}
+.poster .treatment-plan-report{background:#e5f2ff!important;border:1px solid #cbdff8!important;border-radius:15px;padding:14px;margin-top:10px}
+.poster .radiograph-report{background:#e8f2ff!important;border:1px solid #cbdff8!important}
+.poster .actionarticle{background:#fff3cc!important;border:1px solid #f3e3ae!important}
+.poster .photoarticle{border:1px solid #d5e5fa!important}
+.poster .postergrid article,.poster .pain-anxiety-report,.poster .medical-history-report,.poster .treatment-plan-report,.poster .photoarticle,.poster .actionarticle{box-shadow:0 2px 7px rgba(92,65,100,.045)}
+.feeling-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.feeling-grid>div{background:rgba(255,255,255,.7);border-radius:11px;padding:10px}
+.feeling-grid b{display:block;font-size:13px;color:#59436b}
+.feeling-face{font-size:30px;margin-top:4px}
+.feeling-grid p{margin:2px 0;font-weight:700}
+.feeling-grid small{font-size:10px;color:#6e6075}
+@media(max-width:560px){.feeling-grid{grid-template-columns:1fr 1fr;gap:8px}.feeling-grid>div{padding:8px}}
