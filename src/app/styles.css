@@ -62,3 +62,7 @@
 .posterbody>footer{margin-top:12px;padding:10px;border-radius:12px;background:linear-gradient(90deg,#ffe3ee,#fff0ca,#dcf5e7);color:#67516c;text-align:center;font-size:10px}
 @media(max-width:900px){.postergrid{grid-template-columns:1fr}.photogrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media print{.poster{border:0;box-shadow:none}.posterhead{background:linear-gradient(115deg,#ffdce9,#fff0c7,#d9f5e8)!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+
+/* Five-point Facial Image Scale for child dental anxiety */
+.anxiety-faces{grid-template-columns:repeat(5,minmax(0,1fr))}.anxietybox{background:#fff8f0;border-color:#f1dfc9}.anxiety-faces .face span{font-size:30px}
+@media(max-width:560px){.anxiety-faces{grid-template-columns:repeat(5,minmax(0,1fr))}.anxiety-faces .face{padding:7px 2px}.anxiety-faces .face span{font-size:25px}.anxiety-faces .face small{font-size:8px}}
