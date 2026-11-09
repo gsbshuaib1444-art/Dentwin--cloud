@@ -66,6 +66,7 @@ export default function Home() {
    const {error}=await supabase.from('patients').delete().eq('id',p.id);if(error)setMessage(error.message);else{setMessage('Patient deleted.');setSelected(null);setForm(blank());await loadPatients()}}
  async function signed(path:string){if(!supabase)return '';const {data}=await supabase.storage.from('patient-photos').createSignedUrl(path,3600);return data?.signedUrl||''}
  async function printPoster(){if(!selected)return;const imgs:Record<string,string>={};const paths={...(selected.photos||{}),iopa_photo:selected.photos?.iopa_photo||selected.iopa_photo||'',opg_photo:selected.photos?.opg_photo||selected.opg_photo||''};for(const [k,v] of Object.entries(paths))if(v)imgs[k]=await signed(v);setPreviews(imgs);setTimeout(()=>window.print(),500)}
+ const clinicalEducation=getClinicalEducation(String(form.findings||''));
  const filtered=patients.filter(p=>p.study_id.toLowerCase().includes(search.toLowerCase())||(p.age||'').toLowerCase().includes(search.toLowerCase()));
  const set=(k:string,v:any)=>setForm((f:any)=>({...f,[k]:v}));
  const treatmentOptions=['Oral prophylaxis','Fluoride varnish application','Pit and fissure sealant','Preventive resin restoration','GIC restoration','Composite restoration','Atraumatic restorative treatment (ART)','Pulpotomy','Pulpectomy','Stainless steel crown (SSC)','Extraction','Space maintainer','Habit counselling','Dietary counselling','Preventive advice','Review / recall','Referral','Other'];
