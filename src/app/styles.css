@@ -361,3 +361,13 @@ button:active:not(:disabled){transform:scale(.98)}
 .apphead:after{content:none!important;animation:none!important}
 .apphead .headright{position:absolute;right:14px;top:50%;transform:translateY(-50%);z-index:2}
 @media(max-width:560px){.apphead{min-height:148px;padding:42px 16px 14px!important}.apphead>div:first-child{max-width:100%}.apphead .headright{right:10px;top:9px;transform:none;display:flex;align-items:center;gap:6px}.apphead .headright span{font-size:10px}.apphead .headright button{padding:7px 9px;font-size:11px}.apphead p{max-width:280px;font-size:12px!important}}
+
+/* Restore the earlier left-aligned dashboard header layout */
+.apphead{display:flex!important;flex-direction:row!important;justify-content:space-between!important;align-items:center!important;min-height:0!important;padding:17px 22px!important}
+.apphead>div:first-child{width:auto!important;max-width:none!important;text-align:left!important;position:relative;z-index:1}
+.apphead .logo{display:inline-grid!important;place-items:center!important;width:36px!important;height:36px!important;margin:0 8px 0 0!important;padding:6px!important;border-radius:10px!important;vertical-align:middle!important}
+.apphead h1{display:inline-block!important;margin:0!important;text-align:left!important;font-size:25px!important;vertical-align:middle!important;line-height:1.2!important}
+.apphead p{margin:2px 0 0 43px!important;max-width:340px!important;text-align:left!important;font-size:12px!important;line-height:1.4!important}
+.apphead .headright{position:static!important;transform:none!important;display:flex!important;align-items:center!important;gap:12px!important;z-index:2}
+.apphead:after{content:none!important}
+@media(max-width:560px){.apphead{padding:12px!important;gap:8px!important}.apphead>div:first-child{flex:1 1 auto!important;min-width:0!important}.apphead h1{font-size:22px!important}.apphead p{max-width:230px!important;margin:3px 0 0 44px!important;font-size:11px!important}.apphead .headright{flex:0 0 auto!important;display:grid!important;gap:5px!important}.apphead .headright span{font-size:10px!important}.apphead .headright button{padding:7px 9px!important;font-size:11px!important}}
