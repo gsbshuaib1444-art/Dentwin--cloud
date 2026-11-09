@@ -347,3 +347,5 @@ button:active:not(:disabled){transform:scale(.98)}
 .parent-treatment-explanation p{margin:0;font-size:13px;line-height:1.65;color:#4a5d76}
 .parent-treatment-explanation small{display:block;margin-top:8px;font-size:10px;line-height:1.45;color:#71839a}
 @media(max-width:560px){.multi-select-options{grid-template-columns:1fr}.multi-select-field{padding:10px}.multi-select-options label{padding:9px}}
+
+.poster-section-title{margin:0 0 13px;padding:13px 16px;border:1px solid #d8e5f5;border-radius:14px;background:linear-gradient(100deg,#fff0f5,#fff7d9,#e9f8ef);color:#67436f;text-align:center;font-size:clamp(15px,2.2vw,20px);font-weight:800;line-height:1.45;letter-spacing:.2px}.poster-section-title u{text-decoration-thickness:2px;text-underline-offset:5px}
