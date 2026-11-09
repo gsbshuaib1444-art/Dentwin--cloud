@@ -332,3 +332,18 @@ button:active:not(:disabled){transform:scale(.98)}
 @media(max-width:560px){.education-backdrop{padding:9px;align-items:center}.education-modal{padding:14px;border-radius:20px;max-height:94dvh}.education-player{min-height:170px}.education-mascots span{width:47px;height:51px;font-size:30px}.education-actions{flex-direction:column}.poster-treatment-link{align-items:flex-start;flex-direction:column}.learn-pill{align-self:flex-start}}
 @media(prefers-reduced-motion:reduce){.education-modal,.education-mascots span{animation:none!important}.poster-treatment-link{transition:none!important}}
 @media print{.education-backdrop{display:none!important}.poster-treatment-link{border:0;background:transparent;padding:0}.learn-pill,.treatment-learn-hint{display:none}}
+
+
+/* Expanded paediatric assessment controls */
+.multi-select-field{min-width:0;margin:0;padding:12px 13px;border:1.5px solid #d9e2f2;border-radius:14px;background:linear-gradient(135deg,#f7faff,#fff8fc)}
+.multi-select-field legend{padding:0 5px;color:#405b82;font-size:13px;font-weight:850}
+.multi-select-field legend small{font-size:10px;font-weight:600;color:#8290a5}
+.multi-select-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin-top:8px}
+.multi-select-options label{display:flex;align-items:flex-start;gap:8px;min-width:0;margin:0;padding:8px 9px;border:1px solid #e1e8f3;border-radius:10px;background:#fff;color:#53647c;font-size:12px;font-weight:650;line-height:1.35;cursor:pointer}
+.multi-select-options input{width:16px;height:16px;flex:none;margin:0;accent-color:#5b8ed2}
+.multi-select-options span{min-width:0}
+.parent-treatment-explanation{margin:0 0 13px;padding:14px 15px;border:1px solid #d8e6f4;border-radius:15px;background:linear-gradient(135deg,#eff8ff,#f5f0ff 55%,#eefaf5);color:#385575}
+.parent-treatment-explanation b{display:block;margin-bottom:7px;font-size:14px;color:#315d8a}
+.parent-treatment-explanation p{margin:0;font-size:13px;line-height:1.65;color:#4a5d76}
+.parent-treatment-explanation small{display:block;margin-top:8px;font-size:10px;line-height:1.45;color:#71839a}
+@media(max-width:560px){.multi-select-options{grid-template-columns:1fr}.multi-select-field{padding:10px}.multi-select-options label{padding:9px}}
