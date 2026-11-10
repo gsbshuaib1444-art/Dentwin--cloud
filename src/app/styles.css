@@ -404,3 +404,15 @@ button:active:not(:disabled){transform:scale(.98)}
 .diet-advice-report li p{margin:3px 0;color:#485d72;font-size:12px;line-height:1.55}
 .diet-advice-report li .diet-advice-tamil{color:#526b69}
 @media print{.diet-advice-report{background:#f5faf7!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+
+
+/* Ordered patient assessment and matching poster summary */
+.poster-ordered-report{margin:14px 0;padding:15px;border:1px solid #dce7f5;border-radius:15px;background:#f8fbff;color:#344b67;break-inside:avoid}
+.poster-ordered-report h3{margin:0 0 11px;color:#315b88;font-size:16px}
+.poster-ordered-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+.poster-ordered-grid>div{display:flex;flex-direction:column;gap:3px;min-width:0;padding:8px 10px;border:1px solid #e4ebf5;border-radius:9px;background:#fff;break-inside:avoid}
+.poster-ordered-grid b{color:#607792;font-size:10px;text-transform:uppercase;letter-spacing:.035em}
+.poster-ordered-grid span{color:#344b67;font-size:12px;line-height:1.45;overflow-wrap:anywhere}
+.poster-ordered-grid .poster-ordered-media{background:#f1f7ff}
+@media(max-width:620px){.poster-ordered-grid{grid-template-columns:1fr}}
+@media print{.poster-ordered-report{background:#f8fbff!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}}
