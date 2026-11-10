@@ -121,6 +121,7 @@ function Poster({patient:p,previews,onPrint}:{patient:Patient,previews:Record<st
  const painIndex=Math.max(0,Math.min(5,Math.round(Number(p.pain_face??p.pain_score??0)/2)));
  const anxietyFaces=['😃','🙂','😐','🙁','😭'];
  const anxietyLabels=['Relaxed','Slightly concerned','Moderately anxious','Anxious','Very anxious'];
+ const anxietyIndex=Number(p.anxiety_score||0)-1;
  const sweetData=p.sweet_score_data||{};
  const calculatedSweetScore=Number(p.sweet_score??(Number(sweetData.liquid?.frequency||0)*5+Number(sweetData.sticky_solid?.frequency||0)*10+Number(sweetData.slowly_dissolving?.frequency||0)*15));
  const hasSweetData=!!(sweetData.liquid?.frequency||sweetData.sticky_solid?.frequency||sweetData.slowly_dissolving?.frequency);
