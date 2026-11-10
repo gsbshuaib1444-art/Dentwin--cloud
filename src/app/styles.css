@@ -481,3 +481,50 @@ button:active:not(:disabled){transform:scale(.98)}
 .compact-footer span{font-size:9px}
 @media(max-width:560px){.compact-poster{padding:10px}.compact-poster .compact-section{padding:11px}.compact-photogrid{grid-template-columns:repeat(2,minmax(0,1fr))}.compact-hero{padding:10px}.compact-risk{min-width:82px;padding:7px}.posterhead h2{font-size:19px!important}}
 @media print{.compact-poster .compact-section,.compact-hero,.finding-highlight,.parent-friendly-copy,.compact-advice,.recall-strip{-webkit-print-color-adjust:exact;print-color-adjust:exact}.compact-poster .compact-section{break-inside:avoid}.compact-photogrid img,.compact-photogrid .photoplace{height:90px}}
+
+
+/* Personalised pastel parent-facing report layout */
+.redesigned-poster-head{background:linear-gradient(115deg,#ffe3ef 0%,#fff1c9 48%,#ddf5e9 100%)!important;border-radius:20px 20px 0 0}
+.redesigned-poster{padding:12px 14px 16px;background:#fff}
+.poster-section-title{text-align:center;padding:9px 8px 13px}
+.poster-section-title h2{font-size:19px;line-height:1.25;color:#654b79;margin:0;text-decoration:underline;text-decoration-color:#d8a6c7;text-underline-offset:5px}
+.poster-section-title p{font-size:11px;color:#718096;margin:8px 0 0}
+.poster-info-card{border-radius:17px;padding:13px;margin:10px 0;break-inside:avoid;border:1px solid rgba(110,120,150,.10);box-shadow:0 3px 12px rgba(75,85,120,.045)}
+.poster-info-card h3{font-size:15px;color:#465778;margin:0 0 10px}
+.pastel-lilac{background:linear-gradient(135deg,#f0eaff,#f8f3ff)}
+.pastel-pink{background:linear-gradient(135deg,#ffeaf1,#fff3f6)}
+.pastel-mint{background:linear-gradient(135deg,#e4f7ed,#f1fbf5)}
+.pastel-yellow{background:linear-gradient(135deg,#fff4d4,#fff9e9)}
+.pastel-blue{background:linear-gradient(135deg,#e8f3ff,#f2f7ff)}
+.pastel-peach{background:linear-gradient(135deg,#ffebdc,#fff5e9)}
+.poster-info-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+.poster-info-grid>div{min-width:0;padding:9px 10px;border-radius:11px;background:rgba(255,255,255,.82);border:1px solid rgba(140,150,175,.12)}
+.poster-info-grid small,.poster-info-grid b{display:block}
+.poster-info-grid small{font-size:9px;letter-spacing:.7px;color:#718097;font-weight:850}
+.poster-info-grid b{font-size:13px;color:#43536f;margin-top:4px;overflow-wrap:anywhere}
+.poster-habit-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+.poster-habit-grid>div{display:flex;align-items:center;gap:8px;padding:8px;border-radius:11px;background:rgba(255,255,255,.8);font-size:18px;min-width:0}
+.poster-habit-grid>div span{display:block;min-width:0}
+.poster-habit-grid small,.poster-habit-grid b{display:block}
+.poster-habit-grid small{font-size:9px;color:#728096}
+.poster-habit-grid b{font-size:11px;color:#45566e;margin-top:2px;overflow-wrap:anywhere}
+.poster-advice{margin-top:10px;padding:10px;border-radius:12px;background:rgba(255,255,255,.75)}
+.poster-advice>b{font-size:11px;color:#397263}
+.poster-advice ul{padding-left:17px;margin:5px 0 0}
+.poster-advice li{font-size:10.5px;line-height:1.45;color:#455d58;margin:6px 0}
+.poster-finding{padding:10px;border-radius:11px;background:rgba(255,255,255,.84);border-left:4px solid #e3a5bd;margin:8px 0}
+.poster-finding small{font-size:9px;letter-spacing:.8px;color:#718097;font-weight:850}
+.poster-finding p{font-size:13px;line-height:1.5;font-weight:650;color:#40516d;margin:4px 0 0}
+.poster-info-card>p{font-size:11px;line-height:1.5;color:#4c5d74;margin:7px 0}
+.poster-explanation{padding:10px;border-radius:11px;background:#fff; margin-top:9px;color:#5e526b}
+.poster-explanation>b{font-size:11px}
+.poster-explanation p{font-size:11px;line-height:1.55;margin:5px 0 0}
+.poster-diagnosis{padding:11px;border-radius:11px;background:rgba(255,255,255,.82);font-size:14px!important;font-weight:750;color:#514675!important}
+.poster-treatment-card .poster-treatment-list{padding-left:18px;margin:0}
+.poster-treatment-card .poster-treatment-list li{margin:8px 0}
+.poster-treatment-card .poster-treatment-copy{background:rgba(255,255,255,.86);border-radius:11px;padding:9px}
+.poster-treatment-card .poster-treatment-copy>p{font-size:10.5px;line-height:1.45;margin:6px 0 0;color:#4d5c70}
+.poster-treatment-card .poster-treatment-link{width:100%;display:flex;justify-content:space-between;gap:8px;text-align:left;background:#e1f3e9;color:#315d59;padding:8px 10px;border-radius:9px;font-size:12px;font-weight:750}
+.poster-learn-note{font-size:10px!important;color:#66768a!important;margin-top:8px!important}
+@media(max-width:560px){.redesigned-poster{padding:9px}.poster-info-card{padding:11px}.poster-info-grid,.poster-habit-grid{gap:6px}.poster-info-grid>div{padding:8px}}
+@media print{.poster-info-card,.poster-info-grid>div,.poster-habit-grid>div,.poster-advice,.poster-finding,.poster-explanation,.poster-diagnosis,.recall-strip{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
