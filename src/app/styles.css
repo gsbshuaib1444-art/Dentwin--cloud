@@ -424,3 +424,60 @@ button:active:not(:disabled){transform:scale(.98)}
 .upload-section .uploadgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
 .upload-section .upload{min-width:0}
 .upload-section .upload input{max-width:100%;min-width:0}
+
+
+/* Compact, colourful, parent-facing dental report */
+.compact-poster{background:#fff;padding:14px}
+.compact-poster .compact-section{border:0;border-radius:16px;padding:14px;margin:10px 0;background:linear-gradient(135deg,#f0f7ff,#fbf4ff 58%,#effaf5);break-inside:avoid}
+.compact-poster .compact-section h3{font-size:16px;color:#38577f;margin:0 0 10px}
+.poster-eyebrow{display:block;font-size:10px;letter-spacing:1.5px;font-weight:900;color:#426b9c;margin-bottom:5px}
+.posterhead{background:linear-gradient(115deg,#ffe4f0,#fff0c9 48%,#dff7eb)!important}
+.posterhead h2{font-size:22px!important;color:#4e4775!important}
+.posterhead p{color:#59657c!important}
+.compact-hero{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:13px;border-radius:15px;background:linear-gradient(110deg,#e3f2ff,#f4eaff,#e4f8ed)}
+.compact-child{display:flex;align-items:center;gap:10px;min-width:0}
+.compact-avatar{width:46px;height:46px;display:grid;place-items:center;border-radius:50%;background:#fff;font-size:25px}
+.compact-child b,.compact-child span{display:block}
+.compact-child b{font-size:17px;color:#4d4a78}
+.compact-child span{font-size:11px;color:#5f6c82;margin-top:3px}
+.compact-risk{padding:8px 12px;border-radius:12px;background:#fff2c9;text-align:center;min-width:94px}
+.compact-risk small,.compact-risk b{display:block}
+.compact-risk small{font-size:9px;letter-spacing:1px;color:#856b3f;font-weight:900}
+.compact-risk b{font-size:14px;color:#755b36;margin-top:3px}
+.finding-highlight{background:#fff;border:1px solid #dce8f4;border-left:4px solid #e5a4c6;border-radius:10px;padding:10px;margin:8px 0}
+.finding-highlight small{font-size:9px;letter-spacing:1px;font-weight:900;color:#6b7b93}
+.finding-highlight p{font-size:14px;font-weight:650;color:#344b69;margin:5px 0 0}
+.compact-section>p{font-size:12px;line-height:1.5;margin:7px 0;color:#45566f}
+.compact-metrics{display:flex;flex-wrap:wrap;gap:7px;margin:8px 0}
+.compact-metrics span{flex:1;min-width:130px;padding:8px;border-radius:9px;background:#e4f4ed;font-size:11px;color:#52657b}
+.compact-metrics b{display:block;color:#276c61;font-size:16px}
+.parent-friendly-copy{margin-top:9px;padding:11px;border-radius:11px;background:#fff1d6;color:#655239}
+.parent-friendly-copy>b{font-size:12px}
+.parent-friendly-copy p{font-size:12px;line-height:1.55;margin:5px 0 0}
+.ta-copy{font-size:11px!important;line-height:1.55;color:#506d70!important;margin:5px 0 0!important}
+.image-label{display:block;font-size:11px;color:#536b91;margin:8px 0 6px}
+.compact-photogrid{grid-template-columns:repeat(3,minmax(0,1fr));margin-bottom:8px}
+.compact-photogrid img,.compact-photogrid .photoplace{height:105px}
+.compact-photogrid figcaption{font-size:10px;font-weight:700}
+.habit-chips{display:flex;flex-wrap:wrap;gap:7px}
+.habit-chips span{background:#fff;border:1px solid #dce8ed;border-radius:20px;padding:7px 10px;font-size:11px;color:#405c69}
+.compact-advice{margin-top:10px;padding:11px;border-radius:12px;background:#e3f6ec}
+.compact-advice>b{font-size:12px;color:#276b5d}
+.compact-advice ul{padding-left:17px;margin:6px 0 0}
+.compact-advice li{font-size:11px;line-height:1.5;margin:7px 0;color:#415c59}
+.compact-advice li>p{margin-top:3px}
+.comfort-section{background:linear-gradient(120deg,#fff0f3,#f2efff)!important}
+.compact-treatment{background:linear-gradient(120deg,#eaf4ff,#f5efff)!important}
+.section-intro{font-size:11px;color:#66758c;margin:-4px 0 8px}
+.compact-treatment .poster-treatment-list{padding-left:18px}
+.compact-treatment .poster-treatment-list li{margin:7px 0}
+.compact-treatment .poster-treatment-copy{background:#fff;border-radius:10px;padding:9px}
+.compact-treatment .poster-treatment-copy>p{font-size:11px;line-height:1.45;margin:5px 0 0}
+.compact-treatment .poster-treatment-link{width:100%;display:flex;justify-content:space-between;gap:8px;text-align:left;background:#e4f5ed;color:#315d59;padding:8px 10px;border-radius:9px;font-size:12px}
+.compact-actions{padding-left:20px;margin:0}
+.compact-actions li{font-size:12px;line-height:1.5;margin:6px 0;color:#40566e}
+.recall-strip{margin-top:9px;padding:10px;border-radius:10px;background:#ffefc8;color:#705d35;font-size:12px}
+.compact-footer{text-align:center;padding:10px 4px;color:#60718a;font-size:10px}
+.compact-footer span{font-size:9px}
+@media(max-width:560px){.compact-poster{padding:10px}.compact-poster .compact-section{padding:11px}.compact-photogrid{grid-template-columns:repeat(2,minmax(0,1fr))}.compact-hero{padding:10px}.compact-risk{min-width:82px;padding:7px}.posterhead h2{font-size:19px!important}}
+@media print{.compact-poster .compact-section,.compact-hero,.finding-highlight,.parent-friendly-copy,.compact-advice,.recall-strip{-webkit-print-color-adjust:exact;print-color-adjust:exact}.compact-poster .compact-section{break-inside:avoid}.compact-photogrid img,.compact-photogrid .photoplace{height:90px}}
