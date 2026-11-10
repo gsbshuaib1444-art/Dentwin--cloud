@@ -416,3 +416,11 @@ button:active:not(:disabled){transform:scale(.98)}
 .poster-ordered-grid .poster-ordered-media{background:#f1f7ff}
 @media(max-width:620px){.poster-ordered-grid{grid-template-columns:1fr}}
 @media print{.poster-ordered-report{background:#f8fbff!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+
+
+/* Keep intraoral photo and radiograph uploads as separate full-width sections in the requested order */
+.upload-section{grid-column:1/-1;min-width:0;margin-top:6px}
+.upload-section .subhead{margin:8px 0 7px}
+.upload-section .uploadgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.upload-section .upload{min-width:0}
+.upload-section .upload input{max-width:100%;min-width:0}
