@@ -392,3 +392,15 @@ button:active:not(:disabled){transform:scale(.98)}
 .sweet-score-footnote{display:block;margin-top:9px;color:#657995;font-size:11px;line-height:1.45}
 .sweet-score-badge.excellent{background:#dff4e8;color:#226342}
 .sweet-score-instructions{padding:10px 12px;border-radius:10px;background:#fff;color:#536983}
+
+/* Personalised diet and brushing advice on the child poster */
+.diet-advice-report{margin:14px 0;padding:16px 18px;border:1px solid #cfe3d8;border-radius:16px;background:linear-gradient(135deg,#f0fbf5,#f2f8ff);color:#3d5870;break-inside:avoid}
+.diet-advice-report h3{margin:0 0 7px;color:#286b62;font-size:18px}
+.diet-advice-intro{margin:0 0 10px;color:#5f7188;font-size:13px;line-height:1.55}
+.diet-score-summary{margin:0 0 10px;padding:8px 10px;border-radius:9px;background:#e2f1ed;color:#315e61;font-size:12px}
+.diet-advice-report ul{display:grid;gap:10px;margin:0;padding:0;list-style:none}
+.diet-advice-report li{padding:10px 12px;border-radius:11px;background:rgba(255,255,255,.82);border:1px solid #e0ece7}
+.diet-advice-report li>b{display:block;margin-bottom:4px;color:#315d78;font-size:13px}
+.diet-advice-report li p{margin:3px 0;color:#485d72;font-size:12px;line-height:1.55}
+.diet-advice-report li .diet-advice-tamil{color:#526b69}
+@media print{.diet-advice-report{background:#f5faf7!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}}
