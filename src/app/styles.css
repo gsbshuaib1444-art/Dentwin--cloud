@@ -384,3 +384,11 @@ button:active:not(:disabled){transform:scale(.98)}
 
 /* Sweet Score 24-hour diet assessment */
 .sweet-score-panel{border:1px solid #cbdcf7;border-radius:16px;padding:15px;background:linear-gradient(135deg,#f5f8ff,#f7f2ff);min-width:0}.sweet-score-heading{display:flex;align-items:center;justify-content:space-between;gap:10px}.sweet-score-heading h3{margin:0;color:#36547c}.sweet-score-heading p{margin:3px 0 0;color:#70819a;font-size:12px}.sweet-score-info{margin:12px 0;padding:13px 14px;border:1px solid #c9d9f4;border-radius:12px;background:#fff;color:#435875;font-size:13px;line-height:1.5}.sweet-score-info p{margin:7px 0}.sweet-score-info small{color:#70819a}.sweet-score-instructions{margin:12px 0;color:#5e7089;font-size:12px;line-height:1.5}.sweet-score-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.sweet-score-row{display:grid;gap:5px;min-width:0;padding:11px;border:1px solid #d8e2f2;border-radius:12px;background:#fff}.sweet-score-row>b{font-size:13px;color:#435a78}.sweet-score-row textarea{min-height:54px;background:#fbfdff}.sweet-score-row label{margin:2px 0 0}.sweet-score-result{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:12px;padding:12px;border-radius:12px;background:#e8effa;color:#3d5577}.sweet-score-result>strong{font-size:22px;color:#263e62}.sweet-score-badge{margin-left:auto;padding:6px 12px;border-radius:20px;font-size:12px}.sweet-score-badge.good{background:#dff4e8;color:#226342}.sweet-score-badge.fair{background:#fff0c9;color:#79550c}.sweet-score-badge.watch-out{background:#ffe0df;color:#963c39}@media(max-width:560px){.sweet-score-grid{grid-template-columns:1fr}}
+
+/* Standard weighted Sweet Score controls */
+.sweet-score-row input[type=number]{width:100%;min-height:40px;padding:9px 11px;border:1px solid #d4deef;border-radius:10px;background:#fbfdff;color:#344b6b;font:inherit}
+.sweet-score-weight{display:inline-block;margin-left:5px;padding:3px 7px;border-radius:8px;background:#e9effb;color:#456a9a;font-size:11px}
+.sweet-score-subtotal{color:#647b9b;font-size:11px;font-weight:750}
+.sweet-score-footnote{display:block;margin-top:9px;color:#657995;font-size:11px;line-height:1.45}
+.sweet-score-badge.excellent{background:#dff4e8;color:#226342}
+.sweet-score-instructions{padding:10px 12px;border-radius:10px;background:#fff;color:#536983}
