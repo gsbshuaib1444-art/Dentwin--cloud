@@ -540,3 +540,9 @@ button:active:not(:disabled){transform:scale(.98)}
 .dmft-combined-total{background:#fff1d1!important;border:1px solid #efdca8!important}.dmft-combined-total b{font-size:17px!important;color:#8a6425!important}
 @media(max-width:560px){.profile-photo-editor{align-items:flex-start;padding:10px}.profile-photo-preview{width:62px;height:62px;flex-basis:62px}}
 @media print{.profile-photo-editor{display:none}.poster-profile-photo{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+
+
+/* Keep fluoride toothpaste field label consistent with other form labels */
+.fluoride-field .fluoride-label{font-size:16px!important;line-height:1.35!important;font-weight:700!important}
+.fluoride-field .fluoride-label .info-button{flex:0 0 20px!important}
+@media(max-width:560px){.fluoride-field .fluoride-label{font-size:16px!important}}
