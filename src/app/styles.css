@@ -528,3 +528,15 @@ button:active:not(:disabled){transform:scale(.98)}
 .poster-learn-note{font-size:10px!important;color:#66768a!important;margin-top:8px!important}
 @media(max-width:560px){.redesigned-poster{padding:9px}.poster-info-card{padding:11px}.poster-info-grid,.poster-habit-grid{gap:6px}.poster-info-grid>div{padding:8px}}
 @media print{.poster-info-card,.poster-info-grid>div,.poster-habit-grid>div,.poster-advice,.poster-finding,.poster-explanation,.poster-diagnosis,.recall-strip{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+
+
+/* Patient profile photo and combined caries score */
+.profile-photo-editor{display:flex;align-items:center;gap:14px;padding:13px;margin:10px 0 14px;border:1px solid #dce7f5;border-radius:15px;background:linear-gradient(120deg,#f0f7ff,#f9f1ff)}
+.profile-photo-preview{width:76px;height:76px;flex:0 0 76px;border-radius:50%;overflow:hidden;display:grid;place-items:center;background:#fff;border:3px solid #fff;box-shadow:0 2px 10px #9baac455;font-size:34px}
+.profile-photo-preview img{width:100%;height:100%;object-fit:cover}
+.profile-photo-controls{display:grid;gap:5px;min-width:0}.profile-photo-controls>b{font-size:13px;color:#425777}.profile-photo-controls>small{font-size:11px;color:#687990;line-height:1.4}
+.profile-photo-buttons{display:flex;flex-wrap:wrap;gap:7px;margin-top:5px}.profile-photo-button{position:relative;overflow:hidden;display:inline-flex;align-items:center;padding:8px 11px;border-radius:9px;background:#dff2e9;color:#315d59;font-size:11px;font-weight:750;cursor:pointer}.profile-photo-button.secondary{background:#e8eaff;color:#505887}.profile-photo-button input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer}
+.poster-profile-photo{width:76px;height:76px;object-fit:cover;border-radius:50%;border:3px solid white;box-shadow:0 2px 9px #776b8844}
+.dmft-combined-total{background:#fff1d1!important;border:1px solid #efdca8!important}.dmft-combined-total b{font-size:17px!important;color:#8a6425!important}
+@media(max-width:560px){.profile-photo-editor{align-items:flex-start;padding:10px}.profile-photo-preview{width:62px;height:62px;flex-basis:62px}}
+@media print{.profile-photo-editor{display:none}.poster-profile-photo{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
