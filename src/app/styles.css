@@ -546,3 +546,10 @@ button:active:not(:disabled){transform:scale(.98)}
 .fluoride-field .fluoride-label{font-size:16px!important;line-height:1.35!important;font-weight:700!important}
 .fluoride-field .fluoride-label .info-button{flex:0 0 20px!important}
 @media(max-width:560px){.fluoride-field .fluoride-label{font-size:16px!important}}
+
+
+/* Pulpectomy video: keep the full frame visible and visually close to its Learn entry point */
+.pulpectomy-video-wrap{width:100%;max-width:100%;margin:10px auto 0;padding:10px;border:1px solid #dce8f5;border-radius:16px;background:linear-gradient(135deg,#f4f9ff,#fff8fc);overflow:hidden}
+.pulpectomy-video{display:block;width:100%;max-width:100%;height:auto;max-height:42dvh;aspect-ratio:16/9;object-fit:contain;object-position:center;background:#101827;border-radius:11px}
+.pulpectomy-video-caption{margin:8px 2px 0;color:#71829a;font-size:11px;line-height:1.45;text-align:center}
+@media(max-width:560px){.pulpectomy-video-wrap{margin-top:8px;padding:7px}.pulpectomy-video{max-height:34dvh;aspect-ratio:16/9;object-fit:contain}.pulpectomy-video-caption{font-size:10px}}
